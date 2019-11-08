@@ -1,7 +1,7 @@
 define([
     'coreJS/adapt',
     'coreViews/componentView',
-    './juxtapose.min'
+    'libraries/juxtapose.min'
 ], function(Adapt, ComponentView, Juxtapose) {
 
     var ImageJuxtapose = ComponentView.extend({

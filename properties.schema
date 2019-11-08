@@ -74,7 +74,7 @@
     "_rightImage": {
       "type": "object",
       "required": true,
-      "title": "Left image",
+      "title": "Right image",
       "properties": {
         "src": {
           "type": "string",
@@ -90,7 +90,7 @@
           "default": "",
           "inputType": "Text",
           "validators": [],
-          "help": "Accompanying label to be shown in top left of image",
+          "help": "Accompanying label to be shown in top right of image",
           "translatable": true
         },
         "credit": {
