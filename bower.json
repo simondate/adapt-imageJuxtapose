@@ -1,0 +1,18 @@
+{
+    "name": "adapt-chartjs",
+    "repository": "git://github.com/dancgray/adapt-chartjs.git",
+    "framework": "^2.0.0",
+    "version": "0.0.2",
+    "homepage": "https://github.com/dancgray/adapt-chart",
+    "issues": "https://github.com/dancgray/adapt_chart/issues/new?title=contrib-chart%3A%20please%20enter%20a%20brief%20summary%20of%20the%20issue%20here&body=please%20provide%20a%20full%20description%20of%20the%20problem,%20including%20steps%20on%20how%20to%20replicate,%20what%20browser(s)/device(s)%20the%20problem%20occurs%20on%20and,%20where%20helpful,%20screenshots.",
+    "displayName": "Charts",
+    "component": "chartjs",
+    "assetFields": [],
+    "description": "A charting component, using Chart.js (http://www.chartjs.org/).",
+    "main": "/js/adapt-chartjs.js",
+    "keywords": [
+        "adapt-plugin",
+        "adapt-component"
+    ],
+    "license": "GPL-3.0"
+}

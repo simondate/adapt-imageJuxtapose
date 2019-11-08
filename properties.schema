@@ -1,0 +1,78 @@
+{
+  "type":"object",
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "http://jsonschema.net",
+  "$ref": "http://localhost/plugins/content/component/model.schema",
+  "globals": {
+    "ariaRegion": {
+      "type": "string",
+      "required": true,
+      "default": "This is a charting component.",
+      "inputType": "Text",
+      "validators": []
+    }
+  },
+  "properties":{
+    "_supportedLayout": {
+      "type": "string",
+      "required": true,
+      "enum": ["full-width", "half-width", "both"],
+      "default": "both",
+      "editorOnly": true
+    },
+    "instruction": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "inputType": "Text",
+      "validators": [],
+      "help": "This is the instruction text"
+    },
+    "_chartType": {
+      "type":"string",
+      "required":true,
+      "default": "line",
+      "title":"Chart Type",
+      "enum": ["line", "bar", "horizontalBar", "radar", "polarArea", "pie", "doughnut"],
+      "inputType": {
+        "type": "Select",
+        "options": ["line", "bar", "horizontalBar", "radar", "polarArea", "pie", "doughnut"]
+      },
+      "validators": [],
+      "help": "Select the type of chart you want to use."
+    },
+    "_height": {
+      "type":"number",
+      "required":true,
+      "default":260,
+      "title": "Chart Height",
+      "inputType":"Number",
+      "validators": ["required", "number"],
+      "help": "Chart height in pixels"
+    },
+    "data": {
+      "type": "object",
+      "required": false,
+      "default": {},
+      "title": "Data Sets",
+      "inputType": {
+        "type": "CodeEditor",
+        "mode": "json"
+      },
+      "validators": [],
+      "help": "Enter your labels and data sets here"
+    },
+    "_options": {
+      "type": "object",
+      "required": false,
+      "default": {},
+      "title": "Options",
+      "inputType": {
+        "type": "CodeEditor",
+        "mode": "json"
+      },
+      "validators": [],
+      "help": "Add custom options here. Options must be an object"
+    }
+  }
+}
