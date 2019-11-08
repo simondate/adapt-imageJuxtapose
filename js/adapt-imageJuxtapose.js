@@ -2,7 +2,7 @@ define([
     'coreJS/adapt',
     'coreViews/componentView',
     './juxtapose.min'
-], function(Adapt, ComponentView, Chart) {
+], function(Adapt, ComponentView, Juxtapose) {
 
     var ImageJuxtapose = ComponentView.extend({
 
@@ -14,13 +14,11 @@ define([
             this.listenTo(Adapt, 'device:resize', this.onScreenSizeChanged);
             this.listenTo(Adapt, 'device:changed', this.onDeviceChanged);
             this.listenTo(Adapt, 'accessibility:toggle', this.onAccessibilityToggle);
-            this.checkIfResetOnRevisit();
         },
 
         postRender: function() {
             this.setupJuxtapose();
         },
-
 
         setupJuxtapose: function() {
             var leftImage = this.model.get('_leftImage');
@@ -40,23 +38,14 @@ define([
                   }
               ],
               {
-                  animate: false,
+                  animate: true,
                   showLabels: true,
                   showCredits: true,
-                  startingPosition: "20%",
+                  startingPosition: this.model.get("_startingPosition"),
                   makeResponsive: true
               });
 
             this.setReadyStatus();
-        },
-
-        checkIfResetOnRevisit: function() {
-            var isResetOnRevisit = this.model.get('_isResetOnRevisit');
-
-            // If reset is enabled set defaults
-            if (isResetOnRevisit) {
-                this.model.reset(isResetOnRevisit);
-            }
         },
 
         inview: function(event, visible, visiblePartX, visiblePartY) {

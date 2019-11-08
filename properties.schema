@@ -28,51 +28,82 @@
       "validators": [],
       "help": "This is the instruction text"
     },
-    "_chartType": {
-      "type":"string",
-      "required":true,
-      "default": "line",
-      "title":"Chart Type",
-      "enum": ["line", "bar", "horizontalBar", "radar", "polarArea", "pie", "doughnut"],
-      "inputType": {
-        "type": "Select",
-        "options": ["line", "bar", "horizontalBar", "radar", "polarArea", "pie", "doughnut"]
-      },
-      "validators": [],
-      "help": "Select the type of chart you want to use."
-    },
-    "_height": {
-      "type":"number",
-      "required":true,
-      "default":260,
-      "title": "Chart Height",
-      "inputType":"Number",
-      "validators": ["required", "number"],
-      "help": "Chart height in pixels"
-    },
-    "data": {
-      "type": "object",
+    "_startingPosition": {
+      "type": "string",
       "required": false,
-      "default": {},
-      "title": "Data Sets",
-      "inputType": {
-        "type": "CodeEditor",
-        "mode": "json"
-      },
+      "default": "50%",
+      "inputType": "Text",
       "validators": [],
-      "help": "Enter your labels and data sets here"
+      "title": "Starting position",
+      "help": "The position from the left the slider will appear (add %)"
     },
-    "_options": {
+    "_leftImage": {
       "type": "object",
-      "required": false,
-      "default": {},
-      "title": "Options",
-      "inputType": {
-        "type": "CodeEditor",
-        "mode": "json"
-      },
-      "validators": [],
-      "help": "Add custom options here. Options must be an object"
+      "required": true,
+      "title": "Left image",
+      "properties": {
+        "src": {
+          "type": "string",
+          "required": false,
+          "default": "",
+          "inputType": "Asset:image",
+          "validators": [],
+          "help": ""
+        },
+        "label": {
+          "type":"string",
+          "required": false,
+          "default": "",
+          "inputType": "Text",
+          "validators": [],
+          "help": "Accompanying label to be shown in top left of image",
+          "translatable": true
+        },
+        "credit": {
+          "type":"string",
+          "required": false,
+          "default": "",
+          "inputType": "Text",
+          "validators": [],
+          "title": "attribution",
+          "help": "Text to be displayed as an attribution. Shown below the graphics",
+          "translatable": true
+        }
+      }
+    },
+    "_rightImage": {
+      "type": "object",
+      "required": true,
+      "title": "Left image",
+      "properties": {
+        "src": {
+          "type": "string",
+          "required": false,
+          "default": "",
+          "inputType": "Asset:image",
+          "validators": [],
+          "help": ""
+        },
+        "label": {
+          "type":"string",
+          "required": false,
+          "default": "",
+          "inputType": "Text",
+          "validators": [],
+          "help": "Accompanying label to be shown in top left of image",
+          "translatable": true
+        },
+        "credit": {
+          "type":"string",
+          "required": false,
+          "default": "",
+          "inputType": "Text",
+          "validators": [],
+          "title": "attribution",
+          "help": "Text to be displayed as an attribution. Shown below the graphics",
+          "translatable": true
+        }
+      }
     }
   }
 }
