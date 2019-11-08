@@ -1,12 +1,111 @@
 define([
     'coreJS/adapt',
-    './chartjsView',
-    './chartjsModel'
-], function(Adapt, ChartJSView, ChartJSModel) {
+    'coreViews/componentView',
+    './juxtapose.min'
+], function(Adapt, ComponentView, Chart) {
 
-    return Adapt.register("imageJuxtapose", {
-        view: ChartJSView,
-        model: ChartJSModel
+    var ImageJuxtapose = ComponentView.extend({
+
+        events: {
+
+        },
+
+        preRender: function() {
+            this.listenTo(Adapt, 'device:resize', this.onScreenSizeChanged);
+            this.listenTo(Adapt, 'device:changed', this.onDeviceChanged);
+            this.listenTo(Adapt, 'accessibility:toggle', this.onAccessibilityToggle);
+            this.checkIfResetOnRevisit();
+        },
+
+        postRender: function() {
+            this.setupJuxtapose();
+        },
+
+
+        setupJuxtapose: function() {
+            var leftImage = this.model.get('_leftImage');
+            var rightImage = this.model.get('_rightImage');
+
+            var slider = new juxtapose.JXSlider('.juxtapose-slider',
+              [
+                  {
+                      src: leftImage.src,
+                      label: leftImage.label,
+                      credit: leftImage.credit
+                  },
+                  {
+                    src: rightImage.src,
+                    label: rightImage.label,
+                    credit: rightImage.credit
+                  }
+              ],
+              {
+                  animate: false,
+                  showLabels: true,
+                  showCredits: true,
+                  startingPosition: "20%",
+                  makeResponsive: true
+              });
+
+            this.setReadyStatus();
+        },
+
+        checkIfResetOnRevisit: function() {
+            var isResetOnRevisit = this.model.get('_isResetOnRevisit');
+
+            // If reset is enabled set defaults
+            if (isResetOnRevisit) {
+                this.model.reset(isResetOnRevisit);
+            }
+        },
+
+        inview: function(event, visible, visiblePartX, visiblePartY) {
+            if (visible) {
+                if (visiblePartY === 'top') {
+                    this._isVisibleTop = true;
+                } else if (visiblePartY === 'bottom') {
+                    this._isVisibleBottom = true;
+                } else {
+                    this._isVisibleTop = true;
+                    this._isVisibleBottom = true;
+                }
+
+                if (this._isVisibleTop && this._isVisibleBottom) {
+                    this.$('.component-inner').off('inview');
+                    this.setCompletionStatus();
+                }
+            }
+        },
+
+        remove: function() {
+            if ($("html").is(".ie8")) {
+                var obj = this.$("object")[0];
+                if (obj) {
+                    obj.style.display = "none";
+                }
+            }
+            this.$('.component-widget').off('inview');
+            ComponentView.prototype.remove.call(this);
+        },
+
+        onCompletion: function() {
+            this.setCompletionStatus();
+        },
+
+        onDeviceChanged: function() {
+
+        },
+
+        onScreenSizeChanged: function() {
+
+        },
+
+        onAccessibilityToggle: function() {
+
+        }
+
     });
+
+    return Adapt.register("imageJuxtapose", ImageJuxtapose);
 
 });
