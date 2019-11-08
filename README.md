@@ -2,7 +2,7 @@
 
 A slider to compare two overlaid images. Uses [Juxtapose JS](https://github.com/NUKnightLab/juxtapose).
 
-![A gif of the component](https://rawcdn.githack.com/simondate/assets/6270227690c19f0e66d0726d99890860ab07ab26/imageJuxtapose.gif)
+![A gif of the component](https://rawcdn.githack.com/simondate/assets/31f5b491ab03ff23bcd39f840a2eb4bddeec22c9/imageJuxtapose.gif)
 
 ### Attributes
 
