@@ -1,6 +1,6 @@
 {
     "name": "adapt-chartjs",
-    "repository": "git://github.com/dancgray/adapt-chartjs.git",
+    "repository": "git://github.com/simondate/adapt-imageJuxtapose.js",
     "framework": "^2.0.0",
     "version": "0.0.2",
     "homepage": "https://github.com/dancgray/adapt-chart",
@@ -9,7 +9,7 @@
     "component": "chartjs",
     "assetFields": [],
     "description": "A charting component, using Chart.js (http://www.chartjs.org/).",
-    "main": "/js/adapt-chartjs.js",
+    "main": "/js/adapt-imageJuxtapose.js",
     "keywords": [
         "adapt-plugin",
         "adapt-component"

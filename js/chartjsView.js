@@ -25,16 +25,16 @@ define([
 
 
         setupChart: function() {
-            var ctx = $("#myChart"+this.model.get('_id'));
-            var chart = new Chart(ctx, {
-                type: this.model.get('_chartType'),
-                data: this.model.get('data'),
-                options: this.model.get('_options')
-            });
+            // var ctx = $("#myChart"+this.model.get('_id'));
+            // var chart = new Chart(ctx, {
+            //     type: this.model.get('_chartType'),
+            //     data: this.model.get('data'),
+            //     options: this.model.get('_options')
+            // });
 
             this.setReadyStatus();
 
-            this.model.set("_chart", chart);
+            // this.model.set("_chart", chart);
         },
 
         onDataChanged: function() {
