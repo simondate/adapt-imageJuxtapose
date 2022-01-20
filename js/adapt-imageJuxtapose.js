@@ -1,14 +1,10 @@
 define([
     'coreJS/adapt',
     'coreViews/componentView',
-    'libraries/juxtapose.min'
+    'libraries/juxtapose.min.js'
 ], function(Adapt, ComponentView, Juxtapose) {
 
     var ImageJuxtapose = ComponentView.extend({
-
-        events: {
-
-        },
 
         preRender: function() {
             this.listenTo(Adapt, 'device:resize', this.onScreenSizeChanged);
@@ -17,82 +13,75 @@ define([
         },
 
         postRender: function() {
+            this.setReadyStatus();
+            this.setupInview();
             this.setupJuxtapose();
+
         },
 
         setupJuxtapose: function() {
-            var leftImage = this.model.get('_leftImage');
-            var rightImage = this.model.get('_rightImage');
+            const leftImage = this.model.get('_leftImage');
+            const rightImage = this.model.get('_rightImage');
+            // console.log('hi')
+            // console.log(Juxtapose)
+            // console.log($('juxtapose__slider'));
 
-            var slider = new juxtapose.JXSlider('.juxtapose-slider',
-              [
-                  {
-                      src: leftImage.src,
-                      label: leftImage.label,
-                      credit: leftImage.credit
-                  },
-                  {
+            let context = this;
+            var slider = new Juxtapose.JXSlider('.juxtapose__slider',
+            [
+                {
+                    src: leftImage.src,
+                    label: leftImage.label,
+                    credit: leftImage.credit
+                },
+                {
                     src: rightImage.src,
                     label: rightImage.label,
                     credit: rightImage.credit
-                  }
-              ],
-              {
-                  animate: true,
-                  showLabels: true,
-                  showCredits: true,
-                  startingPosition: this.model.get("_startingPosition"),
-                  makeResponsive: true
-              });
+                }
+            ],
+            {
+                animate: true,
+                showLabels: true,
+                showCredits: true,
+                startingPosition: this.model.get("_startingPosition"),
+                makeResponsive: true
+            });
 
-            this.setReadyStatus();
+
         },
 
-        inview: function(event, visible, visiblePartX, visiblePartY) {
-            if (visible) {
-                if (visiblePartY === 'top') {
-                    this._isVisibleTop = true;
-                } else if (visiblePartY === 'bottom') {
-                    this._isVisibleBottom = true;
-                } else {
-                    this._isVisibleTop = true;
-                    this._isVisibleBottom = true;
-                }
-
-                if (this._isVisibleTop && this._isVisibleBottom) {
-                    this.$('.component-inner').off('inview');
-                    this.setCompletionStatus();
-                }
+        setupInview() {
+            const selector = this.getInviewElementSelector();
+            if (!selector) {
+              this.setCompletionStatus();
+              return;
             }
+      
+            this.setupInviewCompletion(selector);
         },
-
-        remove: function() {
-            if ($("html").is(".ie8")) {
-                var obj = this.$("object")[0];
-                if (obj) {
-                    obj.style.display = "none";
-                }
+      
+          /**
+           * determines which element should be used for inview logic - body, instruction or title - and returns the selector for that element
+           */
+          getInviewElementSelector: function() {
+            if (this.model.get('body')) return '.component__body';
+      
+            if (this.model.get('instruction')) return '.component__instruction';
+      
+            if (this.model.get('displayTitle')) return '.component__title';
+      
+            return null;
+        },
+      
+          checkIfResetOnRevisit: function() {
+            const isResetOnRevisit = this.model.get('_isResetOnRevisit');
+      
+            // If reset is enabled set defaults
+            if (isResetOnRevisit) {
+              this.model.reset(isResetOnRevisit);
             }
-            this.$('.component-widget').off('inview');
-            ComponentView.prototype.remove.call(this);
-        },
-
-        onCompletion: function() {
-            this.setCompletionStatus();
-        },
-
-        onDeviceChanged: function() {
-
-        },
-
-        onScreenSizeChanged: function() {
-
-        },
-
-        onAccessibilityToggle: function() {
-
         }
-
     });
 
     return Adapt.register("imageJuxtapose", ImageJuxtapose);
